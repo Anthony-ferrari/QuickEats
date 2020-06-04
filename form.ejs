@@ -1,0 +1,83 @@
+<%- include("../partials/header") %>
+<div class="bodyRow">
+    <div class="row2">
+        <div class="blackboard">
+            <!-- POST form with instructions and two inputs-->
+            <form action="/Results" method="POST" class='getForm'>
+                <div>
+                    <fieldset id = 'fieldset1'>
+                        <div id="container">
+                            <!-- each instruction has its own div for separation purposes-->
+                            <div><h2 class="formTitle">Recipe Generator <span id="toggle-form"> <i class="fa fa-plus"></i></span></h2></div>
+                            <div class="instructions"> INSTRUCTIONS: .</div>
+                            <div class="instructions deleteExamples"><strong>DELETE EXAMPLE INGREDIENTS BEFORE CLICKING SUBMIT.</strong></div>                           
+                            <div class="instructions">Please enter ONE ingredient at a time and PRESS ENTER when done typing ingredient.</div>
+                            <div class="instructions"> Click on the trash icon to delete any items.</div>
+                            <div class="instructions"> Click submit for recipe results in the Meal Time! tab. Do not click on the Meal Time! tab until after you submit your ingredients. </div>
+                            <div class="alignmentIngredients">
+                                <!-- the input of new ingredients  -->
+                                <div><input class="newIngredient" id = "newIngredient" type="text" placeholder="Add New Ingredient" name="ingredient"></div>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <ul class="formList" id="unorderedList">
+                                        <!-- the example ingredient list to be deleted -->
+                                            <li><span class="spanIcon"><i class="fa fa-trash"></i></span> Example Ingredient 1</li>
+                                            <li><span class="spanIcon"><i class="fa fa-trash"></i></span> Example Ingredient 2</li>
+                                            <li><span class="spanIcon"><i class="fa fa-trash"></i></span> Example Ingredient 3</li>
+                                        </ul>
+                                    </div>
+                                    <!-- used bootstrap grid to separate the list and the icon -->
+                                    <div class="col-lg-4">
+                                        <img src="https://img.icons8.com/clouds/100/000000/restaurant.png"/>
+                                    </div>
+                                </div>
+                                <!-- the submit button does not need an event listener since we use a session to get the value of all inputs from the form -->
+                                <input class= "btn btn-info submitButton" type="submit" id="submitButton" name="submit" value="Submit"></input>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- the below is the format for the user to get groceries from amazon or instacart. 
+    it uses bootstrap grid system for separation and has multiple imgs for logos. 
+    has a href links for redirections -->
+    <div class="row3">
+        <div class="linksWrapper2" id="bottom_center2">
+            <div class="inner_wrapper2">
+                <div class="row text-center">
+                    <div class="col-md-6">
+                    <h4 class="item-2" id="item-2">Amazon Pantry</h4>
+                    <img src="https://img.icons8.com/plasticine/100/000000/amazon.png"/>
+                        <p class="info1">To get more ingredients please click on the button below:</p>
+                                            <!-- an amazon icon link will be here-->
+                        <p class="info2"><a class="btn btn-md btn-info display-4" href="https://www.amazon.com/gp/pantry/info/"><i class="fab fa-amazon"></i> Amazon</a></p>
+                    </div>
+                    <div class="col-md-6">
+                    <h4 class="item-3" id="item-3">Instacart</h4>
+                    <img class = "instacartLogo1" src="https://www.vectorlogo.zone/logos/instacart/instacart-icon.svg">
+                        <p class="info1">If Amazon isn't your thing, then here is another option: </p>
+                                            <!-- instacart link and icon will be here -->
+                        <p class="info2"><a class="btn btn-md btn-info display-4" href="https://www.instacart.com/store/"><span class="iconify" data-icon="simple-icons:instacart" data-inline="false"></span> Instacart</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rowGoBack">
+        <a class="btn btn-info goBack" href="/Home">Go Back</a>
+    </div>
+</div>
+<div class="citationForm">
+    <p>Citations: </p>
+    <p>Bartell, Joshua. "Wood.” Unsplash, 2019, unsplash.com/photos/6vvIBTvL90A.</p>
+    <p>NA, NA. "Amazon Icon.” icons8.Com, 0AD, img.icons8.com/wired/64/000000/amazon.png.</p>
+    <p>NA, NA. “BURBERRY BEIGE MARBLE.” Stonehub India, 2020, stonehubindia.com/public/uploads/product/742609219_05_12_2019_02_12_42.jpg.</p>
+    <p>NA, NA. "Instacart Icon.” vector.logo.zone, vectorlogo.zone/logos/instacart/instacart-icon.svg.</p>
+    <p>NA, NA. "Restaurant Icon.” icons8.Com, 0AD, img.icons8.com/wired/64/000000/restaurant.png.</p>
+    <p>NA, NA. "Turquoise Leather Granite." Allied Stone Inc., 0AD, alliedstoneinc.com/wp-content/uploads/2016/07/Turquoise-Leather-Granite.jpg.</p>
+</div>
+<!-- this is needed for list functionality like the trash (hidden and then active) and crossing out items -->
+<script type="text/javascript" src="/jQueryForm.js"></script>
+<%- include("../partials/footer") %>
