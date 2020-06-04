@@ -1,0 +1,359 @@
+.body {
+	background: #c4b7a5;
+}
+
+/* custom layout for header */
+.navbar-default{
+	background: #c4b7a5;
+}
+.navbar-default .navbar-header{
+	background: #c4b7a5;
+}
+.navbar-brand{
+	color: #F5FFFA;
+}
+.navbar-brand:hover {
+	color: black;
+}
+.logo{
+	font-family: 'Poppins', sans-serif;
+}
+
+/* custom layout for footer */
+.footerDescription{
+	color: #F5FFFA;
+	background: #c4b7a5;
+}
+
+/* custom layout for intro */
+.intro{
+	position:relative;
+	padding: 0;
+	margin: 0;
+	width:100vw;
+	height:100vh;
+}
+.picture1{
+	width: 100%;
+	max-height: 100%;
+	height: auto;
+	margin: auto;
+}
+.description1{
+	position:absolute;
+	top: 39%;
+	left: 59%;
+	transform: translate(-50%, -50%);
+	font-family: 'Poppins', sans-serif;
+}
+.content1{
+	position:absolute;
+	top: 42%;
+	left: 59%;
+	transform: translate(-50%, -50%);
+	font-family: 'Poppins', sans-serif;
+	padding-top: 25px;
+}
+
+/* custom layout for homepage */
+.carousel-inner{
+	max-width: 100vw;
+	max-height: 100vh;
+	position: center;
+}
+.carousel-item{
+	position: relative;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+}
+.item2{
+	max-width: 100%;
+	height:1200px;
+	object-fit: cover;
+}
+
+.carousel{
+	background:#c4b7a5;
+}
+
+.indexButtons{
+	text-align:end;
+	padding-right: 75px;
+	background:#c4b7a5;
+}
+
+.h1First{
+	position:absolute; 
+	float:left;
+	top:20%; 
+	left:40%;
+	color: #332109;
+}
+.h1Second {
+	position:absolute; 
+	float:left;
+	top:20%; 
+	left:40%;
+	color: #ebe7e2;
+}
+.h1Third {
+	position:absolute; 
+	float:left;
+	top:11%; 
+	left:25%;
+	color: #332109;
+}
+.h1Fourth {
+	position:absolute; 
+	float:left;
+	top:5%; 
+	right:6%;
+	color: #ebe7e2;
+}
+.h1Fifth{
+	position:absolute; 
+	float:left;
+	top:19%; 
+	left:40%;
+	color: #c4b7a5;
+}
+
+.picture3{
+	width: 100%;
+}
+.picture4{
+	width: 100%;
+}
+.picture5{
+	width: 100%;
+}
+.picture6{
+	width: 100%;
+}
+
+/* custom layout for about */
+.row1 div{
+	height:350px;
+	position: relative;
+	overflow-x: auto;
+	overflow-y: auto;
+}
+.text-center{
+	text-align:center;
+}
+.anotherRow2{
+	padding:180px 0;
+}
+
+.top_area{
+    background-image:url('https://cdn.flintrehab.com/uploads/2019/05/blurry-vision-after-brain-injury-e1562907835681.jpg');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.logo{
+	text-align: center;
+	font-family: 'Poppins', sans-serif;
+}
+.lead{
+	text-align:center;
+	font-family: 'Poppins', sans-serif;
+}
+.follow{
+	text-align:center;
+	font-family: 'Poppins', sans-serif;
+}
+.col-md-4{
+	padding-top: 50px;
+}
+.info1{
+	padding-top: 15px;
+} 
+.info2{
+	padding-top: 15px;
+}
+.recipe123{
+	background: white;
+}
+.ingredients123{
+	background: white;
+}
+.food123{
+	background: white;
+}
+.wheretoBegin{
+	background: white;	
+}
+.wheretoseeResults{
+	background: white;
+}
+/* custom layout for form page*/
+.bodyRow{
+	background-image: url("https://www.stonehubindia.com/public/uploads/product/742609219_05_12_2019_02_12_42.jpg")
+}
+.row2{
+	padding: 5%;
+	height: 100%;
+	background-image: url("https://www.alliedstoneinc.com/wp-content/uploads/2016/07/Turquoise-Leather-Granite.jpg");
+}
+.blackboard {
+	width: 640px;
+	margin: 0% auto;
+	border: #251907 solid 12px;
+	border-top: #251907 solid 12px;
+	border-left: #251907 solid 12px;
+	border-bottom: #251907 solid 12px;
+	background-image: url("https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80")
+}
+.formTitle {
+	color: white;
+	margin: 0;
+	padding: 10px 0px 20px 20px;
+	text-transform: uppercase;
+	font-size: 24px;
+	font-weight: normal;
+}
+.instructions{
+	color:white;
+	margin-left: 4%;
+	margin-bottom: 2%;
+}
+.newIngredient{
+	margin-left: 6%;
+	margin-bottom: 2%;
+}
+::placeholder{
+	color: black;
+}
+.formList {
+	color: white;
+}
+li:hover span{
+    width: 40px;
+    float:left;
+    opacity: 1.0;
+}
+.spanIcon{
+	background: red;
+	height: 25px;
+	color: white;
+	width: 0px;
+    display: inline-block;
+    transition: 0.1s linear;
+	opacity: 0;
+	margin-right: 20px;
+	text-align: center;
+}
+li span{
+	background: red;
+	height: 25px;
+    margin-right: 20px;
+    text-align: center;
+    color: white;
+    width: 0px;
+    float: right;
+}
+.completed{
+    color: gray;
+    text-decoration: line-through;
+}
+.submitButton{
+	margin-left: 3%;
+	margin-bottom: 2%;
+}
+.resultsLink{
+	margin-left: 3%;
+	margin-bottom: 2%;
+}
+.row3{
+	height: 350px;
+	background-image: url("https://www.stonehubindia.com/public/uploads/product/742609219_05_12_2019_02_12_42.jpg")
+}
+.instacartLogo1{
+	margin: 15.5px 15.5px;
+}
+.item-2{
+	margin-top: 2%;
+}
+.item-3{
+	margin-top: 2%;
+}
+.rowGoBack{
+	background-image: url("https://www.stonehubindia.com/public/uploads/product/742609219_05_12_2019_02_12_42.jpg")
+}
+.goBack{
+	margin: auto 45%;
+}
+.deleteExamples{
+	color: red;
+}
+/* custom layout for results page*/
+.startSlideResults{
+	position:absolute; 
+	top:22%; 
+	left:33%;
+	color: black;
+}
+.card{
+	position: absolute;
+	transform: translate(150%, -215%);
+	max-height: 15%;
+	max-width: 25%;
+}
+.cardCarousel{
+	max-height: 20%;
+	max-width: 100%;
+}
+
+.picture2{
+	width: 100%;
+}
+.card-body{
+	padding: 0;
+}
+.cardCarouselBody{
+	max-height: 45%;
+	max-width: 100%;
+	padding: 0 0;
+	background-color: rgb(45, 42, 48);
+}
+.card-title{
+	font-size: small;
+	color: white;
+}
+.card-text{
+	font-size: x-small;
+	color: white;
+}
+.downloadButton{
+	display: block;
+	margin: auto 45%;
+}
+.divDownload{
+	background: #c4b7a5;
+}
+
+/* custom layout for citations at bottom*/
+.citationIntro{
+	font-size: xx-small;
+	background: #c4b7a5;
+}
+.citationIndex{
+	font-size: xx-small;
+	background: #c4b7a5;
+}
+.citationAbout{
+	font-size: xx-small;
+	background: #c4b7a5;
+}
+.citationForm{
+	font-size: xx-small;
+	background-image: url("https://www.stonehubindia.com/public/uploads/product/742609219_05_12_2019_02_12_42.jpg")
+}
+.citationResults{
+	font-size: xx-small;
+	background: #c4b7a5;
+}
