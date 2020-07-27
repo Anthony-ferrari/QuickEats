@@ -20,6 +20,9 @@
     "express-session": "1.17.1",
     "forever": "^2.0.0",
     "mysql": "^2.8.0",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "request": "^2.88.2"
   }
 }

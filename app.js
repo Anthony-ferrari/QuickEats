@@ -1,8 +1,12 @@
 const express = require("express");
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const keys = require('./config/keys');
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const request = require("request");
+
 
 app.use(session({ localVar: null, secret: "marley" }));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,28 +18,45 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+passport.use(new GoogleStrategy({
+  clientID: keys.googleClientID,
+  clientSecret: keys.googleClientSecret,
+  callbackURL: '/auth/google/callback'
+  }, (accessToken, refreshToken, profile, done)=>{
+    console.log('access token', accessToken);
+    console.log('refresh token', refreshToken);
+    console.log('profile', profile);
+  })
+);
+// get handler for google OAUTH
+app.get('/auth/google', passport.authenticate('google',{
+    scope: ['profile', 'email']
+  })
+);
+
+app.get('/auth/google/callback', passport.authenticate('google'));
 // QuickEats origin page GET Route
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   res.render("recipes/intro");
 });
 
 // Home Page GET Route
-app.get("/Home", function (req, res) {
+app.get("/Home", (req, res)=>{
   res.render("recipes/index");
 });
 
 // About Page GET Route
-app.get("/About", function (req, res) {
+app.get("/About", (req, res)=>{
   res.render("recipes/about");
 });
 
 // Form Page GET Route
-app.get("/Form", function (req, res) {
+app.get("/Form", (req, res)=>{
   res.render("recipes/form");
 });
 
 // Results Page GET Route
-app.get("/Results", function (req, res) {
+app.get("/Results", (req, res)=>{
   if (req.session.localVar == null) {
     res.render("404");
   } else {
@@ -74,12 +95,12 @@ app.post("/Results", (req, res) => {
 });
 
 //error handling from lecture
-app.use(function (req, res) {
+app.use( (req, res)=>{
   res.status(404);
   res.render("404");
 });
 
-app.use(function (err, req, res, next) {
+app.use( (err, req, res, next)=>{
   console.error(err.stack);
   res.type("plain/text");
   res.status(500);
@@ -88,7 +109,7 @@ app.use(function (err, req, res, next) {
 // set port number P
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, function () {
+app.listen(PORT, () => {
   console.log(
     `Express started on http://${process.env.HOSTNAME}:${app.get(
       "port"
