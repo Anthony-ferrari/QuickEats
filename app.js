@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
 const passport = require("passport");
 const bodyParser = require("body-parser");
@@ -7,6 +8,23 @@ const session = require("express-session");
 const request = require("request");
 const app = express();
 const keys = require('./config/keys');
+// cookie is storing data into session
+// session will have ID 
+// this is different than express-session where the cookie references a session:
+// a session id is given as an index to a session store (hash map) and then we can access the user id (node inside linked list)
+// cookie-session allows for 14 KB and express-session uses a remote server 
+// app.use(cookieParser());
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+
+
+// passport is pulling id out of req.session's data
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./models/User');
 require('./routes/authRoutes')(app);
@@ -14,7 +32,6 @@ require('./services/passport');
 
 mongoose.connect(keys.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true});
 
-app.use(session({ localVar: null, secret: "marley" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //set view engine
@@ -24,24 +41,19 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(session({ localVar: null, secret: "marley" }));
 
-// cookie is storing data into session
-// session will have ID 
-// this is different than express-session where the cookie references a session:
-// a session id is given as an index to a session store (hash map) and then we can access the user id (node inside linked list)
-// cookie-session allows for 14 KB and express-session uses a remote server 
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
-  })
-);
-// passport is pulling id out of req.session's data
-app.use(passport.initialize());
-app.use(passport.session());
+//middleware to see if user is logged in
+const isLoggedIn = (req,res,next)=>{
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/")
+};
 
 // QuickEats origin page GET Route
 app.get("/", (req, res) => {
+  console.log(req.user)
   res.render("recipes/intro");
 });
 
@@ -69,22 +81,22 @@ app.get("/Results", (req, res)=>{
     res.render("recipes/results", postContext);
   }
 });
+app.get("/Recipes", isLoggedIn, (req,res)=>{
+  res.render("recipes/savedRecipes")
+})
+
 
 // Results Page POST Route
 app.post("/Results", (req, res) => {
   req.session.ingredientList = [req.body];
 
-  request("http://www.recipepuppy.com/api/?i=" + req.body.ingredient, function (
-    err,
-    response,
-    body
-  ) {
+  request("http://www.recipepuppy.com/api/?i=" + req.body.ingredient, (err,response,body)=> {
     if (!err && 200 <= response.statusCode < 400) {
       // the body is the response.data.results
       const recipes = JSON.parse(body);
       // adding recipes to daParams
       const daParams = [];
-      for (var p in recipes.results) {
+      for (const p in recipes.results) {
         daParams.push(recipes.results[p]);
       }
       // adding key-value pair of postBodyRequest: daParams

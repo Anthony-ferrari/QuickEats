@@ -18,6 +18,9 @@
 .logo{
 	font-family: 'Poppins', sans-serif;
 }
+.auth {
+	float: right;
+}
 
 /* custom layout for footer */
 .footerDescription{
