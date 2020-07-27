@@ -1,12 +1,18 @@
 const express = require("express");
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./config/keys');
-const app = express();
+const mongoose = require("mongoose");
+const cookieSession = require('cookie-session');
+const passport = require("passport");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const request = require("request");
+const app = express();
+const keys = require('./config/keys');
 
+require('./models/User');
+require('./routes/authRoutes')(app);
+require('./services/passport');
+
+mongoose.connect(keys.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true});
 
 app.use(session({ localVar: null, secret: "marley" }));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,23 +24,22 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-passport.use(new GoogleStrategy({
-  clientID: keys.googleClientID,
-  clientSecret: keys.googleClientSecret,
-  callbackURL: '/auth/google/callback'
-  }, (accessToken, refreshToken, profile, done)=>{
-    console.log('access token', accessToken);
-    console.log('refresh token', refreshToken);
-    console.log('profile', profile);
-  })
-);
-// get handler for google OAUTH
-app.get('/auth/google', passport.authenticate('google',{
-    scope: ['profile', 'email']
-  })
-);
 
-app.get('/auth/google/callback', passport.authenticate('google'));
+// cookie is storing data into session
+// session will have ID 
+// this is different than express-session where the cookie references a session:
+// a session id is given as an index to a session store (hash map) and then we can access the user id (node inside linked list)
+// cookie-session allows for 14 KB and express-session uses a remote server 
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+// passport is pulling id out of req.session's data
+app.use(passport.initialize());
+app.use(passport.session());
+
 // QuickEats origin page GET Route
 app.get("/", (req, res) => {
   res.render("recipes/intro");
