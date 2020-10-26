@@ -2,6 +2,16 @@
 <div> 
     <div>
         <p> Here are your saved recipes: </p>
+        <%for (var i in recipesBody){%>  
+            <div class="card" style="width: 18rem;">
+                <img src="https://cdn.pixabay.com/photo/2017/11/10/14/43/bridge-2936500_1280.jpg" class="recipe_image" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><%= recipesBody[i].title%></h5>
+                  <p class="card-text"><%=recipesBody[i].description%></p>
+                  <a href="#" class="btn btn-primary"><%= recipesBody[i].link%></a>
+                </div>
+            </div>
+        <%}%>
     </div>
 </div>
 <%- include("../partials/footer") %>

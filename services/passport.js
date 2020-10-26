@@ -27,7 +27,8 @@ passport.use(new GoogleStrategy({
         return done(null, existingUser);
       }
       //we dont have a user record with this ID, make a new record
-      const user = await new User({ googleId: profile.id }).save();
+      // we can add the name to user with name: profile.name.givenName
+      const user = await new User({ googleId: profile.id, name: profile.name.givenName, recipes: [] }).save();
       done(null, user);
     }
   )

@@ -30,7 +30,14 @@ require('./models/User');
 require('./routes/authRoutes')(app);
 require('./services/passport');
 
-mongoose.connect(keys.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(keys.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true})
+.then(()=>{
+  console.log("Connection open")
+})
+.catch(err => {
+  console.log("there is an error")
+  console.log(err)
+})
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -81,8 +88,26 @@ app.get("/Results", (req, res)=>{
     res.render("recipes/results", postContext);
   }
 });
+
 app.get("/Recipes", isLoggedIn, (req,res)=>{
-  res.render("recipes/savedRecipes")
+  const User = mongoose.model("users");
+  const currUser = req.user
+  const currRecipeList = currUser.recipes
+  const recipesList = {}
+  recipesList.recipesBody = currRecipeList
+  res.render("recipes/savedRecipes", recipesList)
+})
+
+// recipes page post route
+app.post("/Recipes", (req, res)=>{
+  const User = mongoose.model("users");
+  const currUser = req.user
+  const currDBUser = User.findOne({currUser: currUser.googleId})
+  const recipeTitle = [req.body.recipeTitle];
+  const recipeDescription = [req.body.recipeDescription];
+  const recipeLink = [req.body.recipeLink];
+  const recipeToAdd = {title: recipeTitle, description: recipeDescription, link: recipeLink};
+  currDBUser.recipes.push(recipeToAdd).save(done);
 })
 
 
@@ -110,6 +135,10 @@ app.post("/Results", (req, res) => {
     }
   });
 });
+
+
+
+
 
 //error handling from lecture
 app.use( (req, res)=>{

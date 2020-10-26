@@ -28,11 +28,14 @@
           <!-- the card will have an image, the title of recipe, ingredient list and link to recipe -->
             <div class="card">
               <img id="picture" class="card-img-top cardCarousel" src= "https://images.unsplash.com/photo-1495546968767-f0573cca821e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" alt="Card image cap">
-                <div class="card-body cardCarouselBody">
-                  <h5 id="name" class="card-title"><%= postBodyRequest[i].title%></h5>
-                  <p id="description" class="card-text">Ingredients: <%= postBodyRequest[i].ingredients%></p>
-                  <a id="link" href= "<%= postBodyRequest[i].href%>" class="btn btn-outline-success">Go to Recipe!</a>
-                </div>
+                <form action="/Recipes" method="POST" class='ingredientsForm'>
+                  <div class="card-body cardCarouselBody">
+                    <h5 id="recipeTitle" class="card-title"><%= postBodyRequest[i].title%></h5>
+                    <p id="recipeDescription" class="card-text">Ingredients: <%= postBodyRequest[i].ingredients%></p>
+                    <a id="recipeLink" href= "<%= postBodyRequest[i].href%>" class="btn btn-outline-success">Go to Recipe!</a>
+                  </div>
+                  <input class= "btn btn-info submitButton" type="submit" id="ingredientSubmit" name="suingredientSubmitbmit" value="Submit"></input>
+                </form>
             </div>  
         </div> 
     <%}%>
