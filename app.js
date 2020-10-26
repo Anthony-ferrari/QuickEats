@@ -90,7 +90,7 @@ app.get("/Results", (req, res)=>{
 });
 
 app.get("/Recipes", isLoggedIn, (req,res)=>{
-  const User = mongoose.model("users");
+  alert('wht is happening')
   const currUser = req.user
   const currRecipeList = currUser.recipes
   const recipesList = {}
