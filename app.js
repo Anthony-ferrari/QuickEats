@@ -100,6 +100,7 @@ app.get("/Recipes", isLoggedIn, (req,res)=>{
 
 // recipes page post route
 app.post("/Recipes", (req, res)=>{
+  console.log('this works so far')
   const User = mongoose.model("users");
   const currUser = req.user
   const currDBUser = User.findOne({currUser: currUser.googleId})
@@ -108,6 +109,7 @@ app.post("/Recipes", (req, res)=>{
   const recipeLink = [req.body.recipeLink];
   const recipeToAdd = {title: recipeTitle, description: recipeDescription, link: recipeLink};
   currDBUser.recipes.push(recipeToAdd).save(done);
+  res.redirect("/Results");
 })
 
 
