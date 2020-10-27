@@ -29,12 +29,15 @@
             <div class="card">
               <img id="picture" class="card-img-top cardCarousel" src= "https://images.unsplash.com/photo-1495546968767-f0573cca821e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" alt="Card image cap">
                 <form action="/Recipes" method="POST" class='ingredientsForm'>
+                  <input type="hidden" id="recipeTitleInput" name="recipeTitle" value=""/>
+                  <input type="hidden" id="recipeDescriptionInput" name="recipeDescription" value=""/>
+                  <input type="hidden" id="recipeLinkInput" name="recipeLink" value=""/>
                   <div class="card-body cardCarouselBody">
-                    <h5 id="recipeTitle" class="card-title"><%= postBodyRequest[i].title%></h5>
-                    <p id="recipeDescription" class="card-text">Ingredients: <%= postBodyRequest[i].ingredients%></p>
-                    <a id="recipeLink" href= "<%= postBodyRequest[i].href%>" class="btn btn-outline-success">Go to Recipe!</a>
+                    <h5 id="recipeTitle" name="recipeTitle" class="card-title"><%= postBodyRequest[i].title%></h5>
+                    <p id="recipeDescription" name="recipeDescription" class="card-text">Ingredients: <%= postBodyRequest[i].ingredients%></p>
+                    <a id="recipeLink" name="recipeLink" href= "<%= postBodyRequest[i].href%>" class="btn btn-outline-success">Go to Recipe!</a>
                   </div>
-                  <input class= "btn btn-info submitButton" type="submit" id="ingredientSubmit" name="suingredientSubmitbmit" value="Submit"></input>
+                  <input class= "btn btn-info submitButton" type="submit" id="ingredientSubmit" name="ingredientSubmit" value="Submit"></input>
                 </form>
             </div>  
         </div> 
@@ -62,4 +65,5 @@
   <p>Gold, Dan. "Recipe Book.” Unsplash, 2017, unsplash.com/photos/5O1ddenSM4g.</p>
   <p>Niestrój, Henryk. “A Bridge.” Pixabay, Ricoh Imaging Company, 2017, pixabay.com/photos/bridge-wooden-the-fog-foliage-2936500/.</p>
 </div>
+<script type="text/javascript" src="/jQueryForm.js"></script>
 <%- include("../partials/footer") %>

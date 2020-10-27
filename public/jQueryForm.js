@@ -13,7 +13,11 @@ $("ul").on("click", "span", function(event){
 });
 
 //creates list of items (empty at first)
-var clientList = []
+const clientList = []
+const recipeTitleList = []
+const recipeDescList = []
+const recipeLinkList = []
+
 
 //press on enter for item to be pushed into clientList and li to be appended to ul 
 $("input[type='text']").keypress(function(event){
@@ -40,5 +44,21 @@ $("#submitButton").click(function(){
     var ingredientInput = document.getElementById("newIngredient")
     ingredientInput.value = clientList
     console.log(ingredientInput)    
+})
+
+$("#ingredientSubmit").click(function(){
+    const title = document.getElementById("recipeTitle").textContent;
+    const desc = document.getElementById("recipeDescription").textContent;
+    const link = document.getElementById("recipeLink");
+    recipeTitleList.push(title)
+    recipeDescList.push(desc)
+    recipeLinkList.push(link)
+    const userRecipeTitle = document.getElementById("recipeTitleInput")
+    const userRecipeDescription = document.getElementById("recipeDescriptionInput")
+    const userRecipeLink = document.getElementById("recipeLinkInput")
+    userRecipeTitle.value = recipeTitleList
+    userRecipeDescription.value = recipeDescList
+    userRecipeLink.value = recipeLinkList
+
 })
 

@@ -90,31 +90,33 @@ app.get("/Results", (req, res)=>{
 });
 
 app.get("/Recipes", isLoggedIn, (req,res)=>{
-  alert('wht is happening')
   const currUser = req.user
   const currRecipeList = currUser.recipes
   const recipesList = {}
   recipesList.recipesBody = currRecipeList
+  console.log(currUser)
+  console.log(recipesList)
   res.render("recipes/savedRecipes", recipesList)
 })
 
 // recipes page post route
 app.post("/Recipes", (req, res)=>{
-  console.log('this works so far')
   const User = mongoose.model("users");
   const currUser = req.user
   const currDBUser = User.findOne({currUser: currUser.googleId})
-  const recipeTitle = [req.body.recipeTitle];
-  const recipeDescription = [req.body.recipeDescription];
-  const recipeLink = [req.body.recipeLink];
-  const recipeToAdd = {title: recipeTitle, description: recipeDescription, link: recipeLink};
-  currDBUser.recipes.push(recipeToAdd).save(done);
+  // console.log(currDBUser.schema.obj)
+  const recipeTitleVal = [req.body.recipeTitle];
+  const recipeDescriptionVal = [req.body.recipeDescription];
+  const recipeLinkVal = [req.body.recipeLink];
+  const recipeToAdd = {title: recipeTitleVal, description: recipeDescriptionVal, link: recipeLinkVal};
+ //update query goes here 
   res.redirect("/Results");
 })
 
 
 // Results Page POST Route
 app.post("/Results", (req, res) => {
+  console.log(req.body)
   req.session.ingredientList = [req.body];
 
   request("http://www.recipepuppy.com/api/?i=" + req.body.ingredient, (err,response,body)=> {
